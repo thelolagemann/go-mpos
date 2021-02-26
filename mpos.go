@@ -1,3 +1,4 @@
+// Package mpos is an unofficial PHP-MPOS API client for golang.
 package mpos
 
 import (
@@ -8,25 +9,29 @@ import (
 	"net/url"
 )
 
-// MiningPoolHub ...
+// MiningPoolHub is the API client for accessing a
+// php-mpos instance.
 type MiningPoolHub struct {
-	apiKey  string
-	baseURL string
+	// BaseURL is the base URL that all requests are sent to.
+	// Useful for instances that have multiple pools under
+	// different subdomains whilst utilizing the same API key.
+	BaseURL string
+
+	apiKey string
 }
 
-// NewMiningPoolHub ...
+// NewMiningPoolHub returns a MiningPoolHub client configured
+// with the provided key and url.
 func NewMiningPoolHub(apiKey string, baseURL string) *MiningPoolHub {
-	// TODO validate apiKey
 	return &MiningPoolHub{
 		apiKey:  apiKey,
-		baseURL: baseURL,
+		BaseURL: baseURL,
 	}
 }
 
-// get processes a request to be sent to an php-mpos api.
 func (m *MiningPoolHub) get(action string, params *url.Values, bind interface{}) (*http.Response, error) {
 	// build url
-	base, err := url.Parse(m.baseURL)
+	base, err := url.Parse(m.BaseURL)
 	if err != nil {
 		return nil, err
 	}
@@ -42,6 +47,7 @@ func (m *MiningPoolHub) get(action string, params *url.Values, bind interface{})
 	}
 	base.RawQuery = params.Encode()
 
+	// send get request
 	res, err := http.Get(base.String())
 	if err != nil {
 		return nil, err
@@ -49,13 +55,15 @@ func (m *MiningPoolHub) get(action string, params *url.Values, bind interface{})
 	if res.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("%v returned non-ok http code, %v", action, res.StatusCode)
 	}
+
+	// if bind
 	if bind != nil {
 		body, err := ioutil.ReadAll(res.Body)
 		if err != nil {
 			return nil, err
 		}
 		if err := json.Unmarshal(body, &bind); err != nil {
-			return nil, fmt.Errorf("error unmarshaling JSON %v, body: %v", err, string(body))
+			return nil, fmt.Errorf("error parsing json: %v, body: %v", err, string(body))
 		}
 	}
 
