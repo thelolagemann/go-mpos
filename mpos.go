@@ -4,7 +4,6 @@ package mpos
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"net/http"
 	"net/url"
 )
@@ -58,13 +57,18 @@ func (m *MiningPoolHub) get(action string, params *url.Values, bind interface{})
 
 	// if bind
 	if bind != nil {
-		body, err := ioutil.ReadAll(res.Body)
-		if err != nil {
-			return nil, err
+		var decode response
+
+		if err := json.NewDecoder(res.Body).Decode(&decode); err != nil {
+			return nil, fmt.Errorf("error decoding json: %v", err)
 		}
-		if err := json.Unmarshal(body, &bind); err != nil {
-			return nil, fmt.Errorf("error parsing json: %v, body: %v", err, string(body))
+
+		if val, ok := decode[action]; ok {
+			if err := json.Unmarshal(val.Data, &bind); err != nil {
+				return nil, fmt.Errorf("error unmarshalling json: %v", err)
+			}
 		}
+
 	}
 
 	return res, err
@@ -72,7 +76,8 @@ func (m *MiningPoolHub) get(action string, params *url.Values, bind interface{})
 
 // BlockCount get current block height in blockchain.
 func (m *MiningPoolHub) BlockCount() (bRes BlockCountResponse, err error) {
-	_, err = m.get("getblockcount", nil, &bRes)
+	endpoint := "getblockcount"
+	_, err = m.get(endpoint, nil, &bRes)
 	return bRes, err
 }
 
@@ -222,7 +227,11 @@ func (m *MiningPoolHub) UserWorkers(id string) (uRes UserTransactionsResponse, e
 }
 
 // Public fetch public pool statistics, no authentication required
-func (m *MiningPoolHub) Public() (pRes PublicResponse, err error) {
-	_, err = m.get("public", nil, &pRes)
+func (m *MiningPoolHub) Public() (pRes *PublicResponse, err error) {
+	res, err := m.get("public", nil, nil)
+	if err != nil {
+		return nil, err
+	}
+	err = json.NewDecoder(res.Body).Decode(&pRes)
 	return pRes, err
 }
