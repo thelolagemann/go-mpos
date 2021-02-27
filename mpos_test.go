@@ -9,6 +9,8 @@ var (
 	pool = NewMiningPoolHub(os.Getenv("MPOS_API"), "https://ethereum.miningpoolhub.com/index.php")
 )
 
+// TODO: mock tests
+
 func TestBlockCount(t *testing.T) {
 	_, err := pool.BlockCount()
 	if err != nil {
@@ -148,6 +150,11 @@ func TestUserTransactions(t *testing.T) {
 	}
 
 	_, err = pool.UserTransactions("invalid-perms")
+	if err == nil {
+		t.Error("expecting error, got none")
+	}
+
+	_, err = pool.UserTransactions("")
 	if err == nil {
 		t.Error("expecting error, got none")
 	}

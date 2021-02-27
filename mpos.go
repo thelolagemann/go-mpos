@@ -60,12 +60,13 @@ func (m *MiningPoolHub) get(action string, params *url.Values, bind interface{})
 		var decode response
 
 		if err := json.NewDecoder(res.Body).Decode(&decode); err != nil {
+
 			return nil, fmt.Errorf("error decoding json: %v", err)
 		}
 
 		if val, ok := decode[action]; ok {
 			if err := json.Unmarshal(val.Data, &bind); err != nil {
-				return nil, fmt.Errorf("error unmarshalling json: %v", err)
+				return nil, fmt.Errorf("error unmarshalling json: %v, body: %v", err, string(val.Data))
 			}
 		}
 
@@ -207,9 +208,10 @@ func (m *MiningPoolHub) UserStatus(id string) (uRes *UserStatusResponse, err err
 // UserTransactions get a users transactions
 func (m *MiningPoolHub) UserTransactions(id string) (uRes *UserTransactionsResponse, err error) {
 	params := &url.Values{}
-	if id != "" {
-		params.Add("id", id)
+	if id == "" {
+		return nil, fmt.Errorf("UserTransactions method requires an id")
 	}
+	params.Add("id", id)
 	_, err = m.get("getusertransactions", params, &uRes)
 	return uRes, err
 }

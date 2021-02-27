@@ -250,7 +250,7 @@ type UserStatusResponse struct {
 
 // UserTransactionsResponse is the json response returned
 // by the getuserstatus API action for php-mpos.
-type UserTransactionsResponse []struct {
+type UserTransactionsResponse struct {
 	Transactions []struct {
 		ID            int64       `json:"id"`
 		Username      string      `json:"username"`
