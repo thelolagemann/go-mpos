@@ -88,8 +88,7 @@ func (m *MiningPoolHub) get(action string, params *url.Values, bind interface{})
 
 // BlockCount get current block height in blockchain.
 func (m *MiningPoolHub) BlockCount() (blockCount json.Number, err error) {
-	endpoint := "getblockcount"
-	_, err = m.get(endpoint, nil, &blockCount)
+	_, err = m.get("getblockcount", nil, &blockCount)
 	return blockCount, err
 }
 
