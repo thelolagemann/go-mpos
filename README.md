@@ -3,6 +3,21 @@
 
 > An unofficial [PHP-MPOS](https://github.com/MPOS/php-mpos) API Client for go.
 
+## Getting started
+
 ### Install
 `go get -u github.com/thelolagemann/go-mpos`
 
+### Example usage
+```golang
+import "github.com/thelolagemann/go-mpos"
+
+pool := NewMiningPoolHub("API_KEY", "BASE_URL")
+workers, err := pool.UserWorkers()
+if err != nil {
+    // handle err
+}
+for _, worker := range workers {
+    fmt.Printf("%v is hashing away at %v Mh/s", worker.Username, worker.Hashrate)
+}
+```
