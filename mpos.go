@@ -170,73 +170,10 @@ func (m *MiningPoolHub) TopContributors() (tRes *TopContributorsResponse, err er
 	return tRes, err
 }
 
-// UserBalance fetch a users balance. If not admin, will
-// fetch current users balance.
-func (m *MiningPoolHub) UserBalance(id string) (uRes *UserBalanceResponse, err error) {
-	params := &url.Values{}
-	if id != "" {
-		params.Add("id", id)
-	}
-	_, err = m.get("getuserbalance", params, &uRes)
-	return uRes, err
-}
+// TODO get user// self user - check auth
 
-// UserHashrate fetch a users hashrate. If not admin, will
-// fetch current users hashrate.
-func (m *MiningPoolHub) UserHashrate(id string) (uRes float64, err error) {
-	params := &url.Values{}
-	if id != "" {
-		params.Add("id", id)
-	}
-	_, err = m.get("getuserhashrate", params, &uRes)
-	return uRes, err
-}
-
-// UserShareRate fetch a users hashrate. If not admin, will
-// fetch current users hashrate.
-func (m *MiningPoolHub) UserShareRate(id string) (uRes float64, err error) {
-	params := &url.Values{}
-	if id != "" {
-		params.Add("id", id)
-	}
-	_, err = m.get("getusersharerate", params, &uRes)
-	return uRes, err
-}
-
-// UserStatus fetch a users overall status, both id and
-// username work for id. If not admin, will fetch current
-// users status.
-func (m *MiningPoolHub) UserStatus(id string) (uRes *UserStatusResponse, err error) {
-	params := &url.Values{}
-	if id != "" {
-		params.Add("id", id)
-	}
-	_, err = m.get("getuserstatus", params, &uRes)
-	return uRes, err
-}
-
-// UserTransactions get a users transactions
-func (m *MiningPoolHub) UserTransactions(id string) (uRes *UserTransactionsResponse, err error) {
-	params := &url.Values{}
-	if id == "" {
-		return nil, fmt.Errorf("UserTransactions method requires an id")
-	}
-	params.Add("id", id)
-	_, err = m.get("getusertransactions", params, &uRes)
-	return uRes, err
-}
-
-// UserWorkers fetch a users worker status, both
-// id and username work for id. If not admin, will
-// fetch current users workers.
-func (m *MiningPoolHub) UserWorkers(id string) (uRes *UserWorkersResponse, err error) {
-	params := &url.Values{}
-	if id != "" {
-		params.Add("id", id)
-	}
-	_, err = m.get("getuserworkers", params, &uRes)
-	return uRes, err
-}
+// User returns a MiningPoolHubUser struct.
+func (m *MiningPoolHub) User(id int32) *MiningPoolHubUser { return &MiningPoolHubUser{m, id} }
 
 // Public fetch public pool statistics, no authentication required
 func (m *MiningPoolHub) Public() (pRes *PublicResponse, err error) {

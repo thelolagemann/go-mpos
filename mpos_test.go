@@ -136,49 +136,46 @@ func TestTopContributors(t *testing.T) {
 	}
 }
 
+// TODO: handle live-testing non-admin user
 func TestUserBalance(t *testing.T) {
 	mockFuncBody(mockResults["getuserbalance"])
-	if _, err := pool.UserBalance(""); err != nil {
+	if _, err := pool.User(1000).Balance(); err != nil {
 		t.Error(err)
 	}
 }
 
 func TestUserHashrate(t *testing.T) {
 	mockFuncBody(mockResults["getuserhashrate"])
-	if _, err := pool.UserHashrate(""); err != nil {
+	if _, err := pool.User(1000).Hashrate(); err != nil {
 		t.Error(err)
 	}
 }
 
 func TestUserShareRate(t *testing.T) {
 	mockFuncBody(mockResults["getusersharerate"])
-	if _, err := pool.UserShareRate(""); err != nil {
+	if _, err := pool.User(1000).Sharerate(); err != nil {
 		t.Error(err)
 	}
 }
 
 func TestUserStatus(t *testing.T) {
 	mockFuncBody(mockResults["getuserstatus"])
-	if _, err := pool.UserStatus(""); err != nil {
+	if _, err := pool.User(1000).Status(); err != nil {
 		t.Error(err)
 	}
 }
 
 func TestUserTransactions(t *testing.T) {
 	mockFuncBody(mockResults["getusertransactions"])
-	if _, err := pool.UserTransactions("1310"); err != nil {
+	if _, err := pool.User(1000).Transactions(); err != nil {
 		t.Error(err)
-	}
-
-	if _, err := pool.UserTransactions(""); err == nil {
-		t.Error("expecting error, got none")
 	}
 
 }
 
 func TestUserWorkers(t *testing.T) {
 	mockFuncBody(mockResults["getuserworkers"])
-	if _, err := pool.UserWorkers(""); err != nil {
+	if _, err := pool.User(1000).Workers(); err != nil {
 		t.Error(err)
 	}
 }
