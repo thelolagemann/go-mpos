@@ -17,6 +17,11 @@ type MiningPoolHub struct {
 	BaseURL string
 
 	apiKey string
+	client httpClient
+}
+
+type httpClient interface {
+	Do(req *http.Request) (*http.Response, error)
 }
 
 // NewMiningPoolHub returns a MiningPoolHub client configured
@@ -25,6 +30,7 @@ func NewMiningPoolHub(apiKey string, baseURL string) *MiningPoolHub {
 	return &MiningPoolHub{
 		apiKey:  apiKey,
 		BaseURL: baseURL,
+		client:  &http.Client{},
 	}
 }
 
@@ -47,10 +53,15 @@ func (m *MiningPoolHub) get(action string, params *url.Values, bind interface{})
 	base.RawQuery = params.Encode()
 
 	// send get request
-	res, err := http.Get(base.String())
+	req, err := http.NewRequest("GET", base.String(), nil)
 	if err != nil {
 		return nil, err
 	}
+	res, err := m.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	// defer res.Body.Close()
 	if res.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("%v returned non-ok http code, %v", action, res.StatusCode)
 	}
@@ -76,10 +87,10 @@ func (m *MiningPoolHub) get(action string, params *url.Values, bind interface{})
 }
 
 // BlockCount get current block height in blockchain.
-func (m *MiningPoolHub) BlockCount() (bRes *BlockCountResponse, err error) {
+func (m *MiningPoolHub) BlockCount() (blockCount json.Number, err error) {
 	endpoint := "getblockcount"
-	_, err = m.get(endpoint, nil, &bRes)
-	return bRes, err
+	_, err = m.get(endpoint, nil, &blockCount)
+	return blockCount, err
 }
 
 // BlocksFound get last N blocks found as configured in
@@ -96,7 +107,7 @@ func (m *MiningPoolHub) BlockStats() (bRes *BlockStatsResponse, err error) {
 }
 
 // CurrentWorkers get amount of current active workers.
-func (m *MiningPoolHub) CurrentWorkers() (cRes *CurrentWorkersResponse, err error) {
+func (m *MiningPoolHub) CurrentWorkers() (cRes uint64, err error) {
 	_, err = m.get("getcurrentworkers", nil, &cRes)
 	return cRes, err
 }
@@ -108,14 +119,14 @@ func (m *MiningPoolHub) DashboardData() (dRes *DashboardDataResponse, err error)
 }
 
 // Difficulty get current difficulty in blockchain.
-func (m *MiningPoolHub) Difficulty() (dRes *DifficultyResponse, err error) {
+func (m *MiningPoolHub) Difficulty() (dRes json.Number, err error) {
 	_, err = m.get("getdifficulty", nil, &dRes)
 	return dRes, err
 }
 
 // EstimatedTime get estimated time to next block based on
 // pool hashrate (seconds).
-func (m *MiningPoolHub) EstimatedTime() (eRes *EstimatedTimeResponse, err error) {
+func (m *MiningPoolHub) EstimatedTime() (eRes float64, err error) {
 	_, err = m.get("getestimatedtime", nil, &eRes)
 	return eRes, err
 }
@@ -126,7 +137,7 @@ func (m *MiningPoolHub) NavbarData() {
 }
 
 // PoolHashrate get current pool hashrate.
-func (m *MiningPoolHub) PoolHashrate() (pRes *PoolHashrateResponse, err error) {
+func (m *MiningPoolHub) PoolHashrate() (pRes float64, err error) {
 	_, err = m.get("getpoolhashrate", nil, &pRes)
 	return pRes, err
 }
@@ -149,7 +160,7 @@ func (m *MiningPoolHub) PoolStatus() (pRes *PoolStatusResponse, err error) {
 }
 
 // TimeSinceLastBlock get time since last block found (seconds)
-func (m *MiningPoolHub) TimeSinceLastBlock() (tRes *TimeSinceLastBlockResponse, err error) {
+func (m *MiningPoolHub) TimeSinceLastBlock() (tRes uint, err error) {
 	_, err = m.get("gettimesincelastblock", nil, &tRes)
 	return tRes, err
 }
@@ -173,7 +184,7 @@ func (m *MiningPoolHub) UserBalance(id string) (uRes *UserBalanceResponse, err e
 
 // UserHashrate fetch a users hashrate. If not admin, will
 // fetch current users hashrate.
-func (m *MiningPoolHub) UserHashrate(id string) (uRes *UserHashrateResponse, err error) {
+func (m *MiningPoolHub) UserHashrate(id string) (uRes float64, err error) {
 	params := &url.Values{}
 	if id != "" {
 		params.Add("id", id)
@@ -184,7 +195,7 @@ func (m *MiningPoolHub) UserHashrate(id string) (uRes *UserHashrateResponse, err
 
 // UserShareRate fetch a users hashrate. If not admin, will
 // fetch current users hashrate.
-func (m *MiningPoolHub) UserShareRate(id string) (uRes *UserShareRateResponse, err error) {
+func (m *MiningPoolHub) UserShareRate(id string) (uRes float64, err error) {
 	params := &url.Values{}
 	if id != "" {
 		params.Add("id", id)
@@ -219,7 +230,7 @@ func (m *MiningPoolHub) UserTransactions(id string) (uRes *UserTransactionsRespo
 // UserWorkers fetch a users worker status, both
 // id and username work for id. If not admin, will
 // fetch current users workers.
-func (m *MiningPoolHub) UserWorkers(id string) (uRes *UserTransactionsResponse, err error) {
+func (m *MiningPoolHub) UserWorkers(id string) (uRes *UserWorkersResponse, err error) {
 	params := &url.Values{}
 	if id != "" {
 		params.Add("id", id)

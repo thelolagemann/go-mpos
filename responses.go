@@ -10,10 +10,6 @@ type baseResponse struct {
 
 type response map[string]baseResponse
 
-// BlockCountResponse is the json response returned
-// by the getblockcount API action for php-mpos.
-type BlockCountResponse string
-
 // BlocksFoundResponse is the json response returned
 // by the getblocksfound API action for php-mpos.
 type BlocksFoundResponse []struct {
@@ -80,10 +76,6 @@ type BlockStatsResponse struct {
 	One2MonthEstimatedShares int64   `json:"12MonthEstimatedShares"`
 	One2MonthAmount          float64 `json:"12MonthAmount"`
 }
-
-// CurrentWorkersResponse is the json response returned
-// by the getcurrentworkers API action for php-mpos.
-type CurrentWorkersResponse int
 
 // DashboardDataResponse is the json response returned
 // by the getdashboarddata API action for php-mpos.
@@ -162,18 +154,6 @@ type DashboardDataResponse struct {
 	} `json:"network"`
 }
 
-// DifficultyResponse is the json response returned
-// by the getdifficulty API action for php-mpos.
-type DifficultyResponse string
-
-// EstimatedTimeResponse is the json response returned
-// by the getestimatedtime API action for php-mpos.
-type EstimatedTimeResponse float64
-
-// PoolHashrateResponse is the json response returned
-// by the getpoolhashrate API action for php-mpos.
-type PoolHashrateResponse float64
-
 // PoolInfoResponse is the json response returned
 // by the getpoolinfo API action for php-mpos.
 type PoolInfoResponse struct {
@@ -211,10 +191,6 @@ type PoolStatusResponse struct {
 	Nethashrate         float64 `json:"nethashrate"`
 }
 
-// TimeSinceLastBlockResponse is the json response returned
-// by the gettimesincelastblock API action for php-mpos.
-type TimeSinceLastBlockResponse int
-
 // TopContributorsResponse is the json response returned
 // by the gettopcontributors API action for php-mpos.
 type TopContributorsResponse struct {
@@ -230,14 +206,6 @@ type UserBalanceResponse struct {
 	Confirmed   float64 `json:"confirmed"`
 	Unconfirmed float64 `json:"unconfirmed"`
 }
-
-// UserHashrateResponse is the json response returned
-// by the getuserhashrate API action for php-mpos.
-type UserHashrateResponse float64
-
-// UserShareRateResponse is the json response returned
-// by the getusersharerate API action for php-mpos.
-type UserShareRateResponse float64
 
 // UserStatusResponse is the json response returned
 // by the getuserstatus API action for php-mpos.

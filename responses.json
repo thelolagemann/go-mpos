@@ -1,0 +1,354 @@
+{
+  "getblockcount": {
+    "getblockcount": {
+      "version": "1.0.0",
+      "runtime": 11.498928070068,
+      "data": "11942785"
+    }
+  },
+  "getblocksfound": {
+    "getblocksfound": {
+      "version": "1.0.0",
+      "runtime": 8.8391304016113,
+      "data": [
+        {
+          "id": 33390,
+          "height": 2306221,
+          "blockhash": "ce2beac1ba2fa18271e6cf875bb575610554510c438e9a01e81f94caf6f6c922",
+          "confirmations": 60,
+          "amount": 1.139688111492,
+          "difficulty": 289559613807,
+          "time": 1614448262,
+          "accounted": 1,
+          "account_id": 172931,
+          "worker_name": "anonymous.anon",
+          "shares": 4207062,
+          "share_id": 25542221143,
+          "finder": "anonymous",
+          "is_anonymous": 1,
+          "estshares": 17673316
+        },
+        {
+          "id": 33389,
+          "height": 2306187,
+          "blockhash": "a97dfa29f02f9ae821c323dc42442d6269ef028749394c07c9dfc4449650c851",
+          "confirmations": 62,
+          "amount": 1.164994665663,
+          "difficulty": 290075205706,
+          "time": 1614443918,
+          "accounted": 1,
+          "account_id": 419698,
+          "worker_name": "anonymous.anon",
+          "shares": 267172,
+          "share_id": 25541541939,
+          "finder": "anonymous",
+          "is_anonymous": 1,
+          "estshares": 17704786
+        }
+      ]
+    }
+  },
+  "getblockstats": {
+    "getblockstats": {
+      "version": "1.0.0",
+      "runtime": 5.8891773223877,
+      "data": {
+        "Total": 33323,
+        "TotalValid": "32963",
+        "TotalOrphan": "360",
+        "TotalDifficulty": 1.8384628724697e15,
+        "TotalShares": "113135423322",
+        "TotalEstimatedShares": 112210868681,
+        "TotalAmount": 158207.38083403,
+        "1HourTotal": "0",
+        "1HourValid": "0",
+        "1HourOrphan": "0",
+        "1HourDifficulty": 0,
+        "1HourShares": "0",
+        "1HourEstimatedShares": 0,
+        "1HourAmount": 0,
+        "24HourTotal": "3",
+        "24HourValid": "3",
+        "24HourOrphan": "0",
+        "24HourDifficulty": 870877143645,
+        "24HourShares": "64537279",
+        "24HourEstimatedShares": 53154123,
+        "24HourAmount": 3.442365692719,
+        "7DaysTotal": "41",
+        "7DaysValid": "41",
+        "7DaysOrphan": "0",
+        "7DaysDifficulty": 10252338391430,
+        "7DaysShares": "589017811",
+        "7DaysEstimatedShares": 625753076,
+        "7DaysAmount": 47.057453535202,
+        "4WeeksTotal": "148",
+        "4WeeksValid": "147",
+        "4WeeksOrphan": "1",
+        "4WeeksDifficulty": 35613170065006,
+        "4WeeksShares": "2326514406",
+        "4WeeksEstimatedShares": 2173655399,
+        "4WeeksAmount": 171.47321758806,
+        "12MonthTotal": "2228",
+        "12MonthValid": "2203",
+        "12MonthOrphan": "25",
+        "12MonthDifficulty": 3.9707433260184e14,
+        "12MonthShares": "24109028519",
+        "12MonthEstimatedShares": 24235493933,
+        "12MonthAmount": 3205.079505231
+      }
+    }
+  },
+  "getcurrentworkers": {
+    "getcurrentworkers": {
+      "version": "1.0.0",
+      "runtime": 6.7081451416016,
+      "data": 101956
+    }
+  },
+  "getdashboarddata": {
+    "getdashboarddata": {
+      "version": "1.0.0",
+      "runtime": 608.01696777344,
+      "data": {
+        "raw": {
+          "personal": { "hashrate": 845899.346 },
+          "pool": { "hashrate": 11371060137.766 },
+          "network": { "hashrate": 384842654063.91, "esttimeperblock": 14 }
+        },
+        "personal": {
+          "hashrate": 845.899346,
+          "sharerate": 0,
+          "sharedifficulty": 0,
+          "shares": {
+            "valid": 3840,
+            "invalid": 0,
+            "invalid_percent": 0,
+            "unpaid": 0
+          },
+          "estimates": {
+            "block": 1.974e-5,
+            "fee": 1.8e-7,
+            "donation": 2.0e-8,
+            "payout": 1.954e-5
+          }
+        },
+        "balance": { "confirmed": 0.58334503, "unconfirmed": 0.00213469 },
+        "balance_for_auto_exchange": { "confirmed": 0, "unconfirmed": 0 },
+        "balance_on_exchange": 0,
+        "recent_credits_24hours": { "amount": 0.0174208638 },
+        "recent_credits": [
+          { "date": "2021-02-28", "amount": 0.0187128613 },
+          { "date": "2021-02-27", "amount": 0.0172412344 },
+          { "date": "2021-02-26", "amount": 0.0182259548 }
+        ],
+        "pool": {
+          "info": {
+            "name": "Ethereum (ETH) Mining Pool Hub",
+            "currency": "ETH"
+          },
+          "workers": 101956,
+          "hashrate": 11.371060137766,
+          "shares": {
+            "valid": 610901760,
+            "invalid": 304128,
+            "invalid_percent": 0.05,
+            "estimated": 321137736,
+            "progress": 190.23
+          },
+          "price": "",
+          "difficulty": 16,
+          "target_bits": 20
+        },
+        "system": { "load": [6.62, 10.33, 10.6] },
+        "network": {
+          "hashrate": 384.84265406391,
+          "difficulty": "5387797156894727",
+          "block": "11943044",
+          "esttimeperblock": 14
+        }
+      }
+    }
+  },
+  "getdifficulty": {
+    "getdifficulty": {
+      "version": "1.0.0",
+      "runtime": 11.103868484497,
+      "data": "5387784420966808"
+    }
+  },
+  "getestimatedtime": {
+    "getestimatedtime": {
+      "version": "1.0.0",
+      "runtime": 10.361909866333,
+      "data": 2041765669709.6
+    }
+  },
+  "getpoolhashrate": {
+    "getpoolhashrate": {
+      "version": "1.0.0",
+      "runtime": 5.6679248809814,
+      "data": 11294298334.755
+    }
+  },
+  "getpoolinfo": {
+    "getpoolinfo": {
+      "version": "1.0.0",
+      "runtime": 6.6819190979004,
+      "data": {
+        "currency": "ETH",
+        "coinname": "Ethereum",
+        "cointarget": "14",
+        "coindiffchangetarget": 1,
+        "stratumport": "20535",
+        "payout_system": "pplns",
+        "confirmations": 200,
+        "min_ap_threshold": 0.01,
+        "max_ap_threshold": 250000,
+        "reward_type": "block",
+        "reward": 2,
+        "txfee": 0.003,
+        "txfee_manual": 0.003,
+        "txfee_auto": 0.003,
+        "fees": 0.9
+      }
+    }
+  },
+  "getpoolstatus": {
+    "getpoolstatus": {
+      "version": "1.0.0",
+      "runtime": 436.2678527832,
+      "data": {
+        "pool_name": "Ethereum (ETH) Mining Pool Hub",
+        "hashrate": 11196188754.555,
+        "efficiency": 99.97,
+        "workers": 99999,
+        "currentnetworkblock": "11943247",
+        "nextnetworkblock": 11943248,
+        "lastblock": 11943104,
+        "networkdiff": "5387609859845535",
+        "esttime": 2066739732503.2,
+        "estshares": 2.2067649985927e19,
+        "timesincelast": 1803,
+        "nethashrate": 3.8482927570325e14
+      }
+    }
+  },
+  "gettimesincelastblock": {
+    "gettimesincelastblock": {
+      "version": "1.0.0",
+      "runtime": 7.6110363006592,
+      "data": 1852
+    }
+  },
+  "gettopcontributors": {
+    "gettopcontributors": {
+      "version": "1.0.0",
+      "runtime": 25.631189346313,
+      "data": { "hashes": { "account": "anonymous", "hashrate": 34638911.241 } }
+    }
+  },
+  "getuserbalance": {
+    "getuserbalance": {
+      "version": "1.0.0",
+      "runtime": 6.2191486358643,
+      "data": { "confirmed": 0.55688539, "unconfirmed": 8.274e-5 }
+    }
+  },
+  "getuserhashrate": {
+    "getuserhashrate": {
+      "version": "1.0.0",
+      "runtime": 6.8831443786621,
+      "data": 155692.564
+    }
+  },
+  "getusersharerate": {
+    "getusersharerate": {
+      "version": "1.0.0",
+      "runtime": 6.7579746246338,
+      "data": 0
+    }
+  },
+  "getuserstatus": {
+    "getuserstatus": {
+      "version": "1.0.0",
+      "runtime": 272.72510528564,
+      "data": {
+        "username": "user",
+        "shares": {
+          "valid": 12288,
+          "valid1": 1344,
+          "valid2": 0,
+          "valid3": 0,
+          "valid4": 0,
+          "valid5": 0,
+          "valid6": 0,
+          "invalid": 0,
+          "id": 1310,
+          "donate_percent": 0.1,
+          "is_anonymous": 1,
+          "username": "user"
+        },
+        "hashrate": 100000.500,
+        "sharerate": 0
+      }
+    }
+  },
+  "getusertransactions": {
+    "getusertransactions": {
+      "version": "1.0.0",
+      "runtime": 84.571838378906,
+      "data": {
+        "transactions": [
+          {
+            "id": 6184049506,
+            "username": "user",
+            "type": "Credit",
+            "amount": 6.6133e-6,
+            "coin_address": null,
+            "timestamp": "2021-02-28 04:18:10",
+            "txid": null,
+            "height": 11943480,
+            "blockhash": "b4133ff64007c628b13318bee0c03d907c304172c410b315126e055e23cd1030",
+            "confirmations": 189
+          },
+          {
+            "id": 6184032888,
+            "username": "user",
+            "type": "Credit",
+            "amount": 2.24877e-5,
+            "coin_address": null,
+            "timestamp": "2021-02-28 03:56:59",
+            "txid": null,
+            "height": 11943477,
+            "blockhash": "7189a022a17432b3d965b58da86cec1d1ea1b1434c1ef16a085281e43c6e673b",
+            "confirmations": 192
+          }
+        ]
+      }
+    }
+  },
+  "getuserworkers": {
+    "getuserworkers": {
+      "version": "1.0.0",
+      "runtime": 113.64603042603,
+      "data": [
+        {
+          "id": 10000000,
+          "username": "user.worker",
+          "password": "x",
+          "monitor": 0,
+          "hashrate": 0,
+          "difficulty": 0
+        }
+      ]
+    }
+  },
+  "getpublic": {
+    "pool_name": "Ethereum (ETH) Mining Pool Hub",
+    "hashrate": 11274990666.574,
+    "workers": 92559,
+    "shares_this_round": 687025152,
+    "last_block": 11943639,
+    "network_hashrate": 3.943074924209e14
+  }
+}
