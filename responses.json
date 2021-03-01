@@ -343,7 +343,7 @@
       ]
     }
   },
-  "getpublic": {
+  "public": {
     "pool_name": "Ethereum (ETH) Mining Pool Hub",
     "hashrate": 11274990666.574,
     "workers": 92559,

@@ -8,8 +8,11 @@ import (
 	"net/url"
 )
 
-// MiningPoolHub is the API client for accessing a
-// php-mpos instance.
+var (
+	client httpClient
+)
+
+// MiningPoolHub is an API client for php-mpos.
 type MiningPoolHub struct {
 	// BaseURL is the base URL that all requests are sent to.
 	// Useful for instances that have multiple pools under
@@ -24,13 +27,14 @@ type httpClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
 
-// NewMiningPoolHub returns a MiningPoolHub client configured
-// with the provided key and url.
+// NewMiningPoolHub returns a MiningPoolHub client embedded with
+// the provided api key and baseurl. A httpClient is embedded that
+// is used to send all requests.
 func NewMiningPoolHub(apiKey string, baseURL string) *MiningPoolHub {
 	return &MiningPoolHub{
 		apiKey:  apiKey,
 		BaseURL: baseURL,
-		client:  &http.Client{},
+		client:  client,
 	}
 }
 
@@ -170,10 +174,24 @@ func (m *MiningPoolHub) TopContributors() (tRes *TopContributorsResponse, err er
 	return tRes, err
 }
 
-// TODO get user// self user - check auth
-
 // User returns a MiningPoolHubUser struct.
 func (m *MiningPoolHub) User(id int32) *MiningPoolHubUser { return &MiningPoolHubUser{m, id} }
+
+// Account returns a MiningPoolHubUser embedded with
+// your own account ID. It does this by first sending
+// a request to the getuserstatus endpoint, and
+// accessing your ID from the result. AFAIK this is the
+// only reliable way to acquire your own ID.
+func (m *MiningPoolHub) Account() (*MiningPoolHubUser, error) {
+	var status UserStatusResponse
+	_, err := m.get("getuserstatus", nil, &status)
+	if err != nil {
+		return nil, err
+	}
+	return &MiningPoolHubUser{
+		id: status.Shares.ID,
+	}, nil
+}
 
 // Public fetch public pool statistics, no authentication required
 func (m *MiningPoolHub) Public() (pRes *PublicResponse, err error) {
