@@ -210,10 +210,23 @@ type UserBalanceResponse struct {
 // UserStatusResponse is the json response returned
 // by the getuserstatus API action for php-mpos.
 type UserStatusResponse struct {
-	Username  string      `json:"username"`
-	Shares    interface{} `json:"shares"`
-	Hashrate  float64     `json:"hashrate"`
-	Sharerate int         `json:"sharerate"`
+	Username string `json:"username"`
+	Shares   struct {
+		Valid         int     `json:"valid"`
+		Valid1        int     `json:"valid1"`
+		Valid2        int     `json:"valid2"`
+		Valid3        int     `json:"valid3"`
+		Valid4        int     `json:"valid4"`
+		Valid5        int     `json:"valid5"`
+		Valid6        int     `json:"valid6"`
+		Invalid       int     `json:"invalid"`
+		ID            int32   `json:"id"`
+		DonatePercent float64 `json:"donate_percent"`
+		IsAnonymous   int     `json:"is_anonymous"`
+		Username      string  `json:"username"`
+	} `json:"shares"`
+	Hashrate  float64 `json:"hashrate"`
+	Sharerate int     `json:"sharerate"`
 }
 
 // UserTransactionsResponse is the json response returned
