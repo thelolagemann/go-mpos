@@ -12,12 +12,13 @@
 ```golang
 import "github.com/thelolagemann/go-mpos"
 
+// create a new pool instance 
 pool := NewMiningPoolHub("API_KEY", "BASE_URL")
-workers, err := pool.UserWorkers()
+
+// get pool info
+info, err := pool.PoolInfo()
 if err != nil {
     // handle err
 }
-for _, worker := range workers {
-    fmt.Printf("%v is hashing away at %v Mh/s", worker.Username, worker.Hashrate)
-}
+fmt.Printf("Pool is mining %v, with a %v%% fee\n", info.Coinname, info.Fees)
 ```
